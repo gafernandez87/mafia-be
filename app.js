@@ -15,13 +15,7 @@ app.use(cors());
 app.use('/api', routes);
 
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "https://mafia-iota.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true
-  }
-});
+const io = socketIo(server);
 const port = process.env.PORT || 4001;
 
 const GameController = require('./controllers/Game');
