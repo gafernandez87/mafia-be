@@ -10,14 +10,9 @@ const routes = require('./routes/index');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', routes);
-
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 const server = http.createServer(app);
 const io = socketIo(server, {
