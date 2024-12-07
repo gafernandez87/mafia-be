@@ -1,5 +1,6 @@
 const Game = require('../models/Game');
 const PlayerController = require('./Player');
+const MarketController = require('./Market');
 
 let game = null;
 const basicJobs = ['mafia', 'policia', 'medico', 'pueblo'];
@@ -17,17 +18,13 @@ const shuffleArray = (input) => {
 };
 
 const assignJobs = () => {
-  const allJobs = [...basicJobs];
-  for (let i = 0; i < (game.players.length - 5); i += 1) {
-    allJobs.push('pueblo');
-  }
-
-  const jobsShuffled = shuffleArray(allJobs);
+  const jobsShuffled = shuffleArray(basicJobs);
   const newPlayers = shuffleArray(game.players).map((p) => {
     const r = getRandom(0, jobsShuffled.length - 1);
+    const job = jobsShuffled.splice(r, 1)[0];
     return {
       ...p,
-      job: p.isAdmin ? 'admin' : jobsShuffled.splice(r, 1)[0],
+      job: job || 'pueblo'
     };
   });
   return newPlayers;
@@ -45,9 +42,10 @@ const isGameOver = () => {
 
 exports.getGame = () => {
   if (!game) {
-    // const players = PlayerController.getMockPlayers();
     const players = PlayerController.getPlayers();
-    game = new Game(players);
+    const market = MarketController.getMarket();
+
+    game = new Game(players,market);
   }
   return game;
 };
@@ -65,7 +63,6 @@ exports.begin = () => {
 
 exports.reset = () => {
   const players = PlayerController.getPlayers();
-  // const players = PlayerController.getMockPlayers();
   game = new Game(players);
   return game;
 };

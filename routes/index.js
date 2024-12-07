@@ -22,6 +22,7 @@ router.get('/players', async (_, res) => {
 });
 
 router.post('/players', (req, res) => {
+  console.log("asdada", req.body);
   const newPlayer = new Player(req.body.name);
   PlayerController.addPlayer(newPlayer);
   res.status(200).json(newPlayer);

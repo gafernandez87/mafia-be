@@ -1,5 +1,5 @@
 class Game {
-  constructor(players) {
+  constructor(players, market) {
     this.players = players;
     this.daytime = 'day';
     this.status = 'new';
@@ -7,6 +7,7 @@ class Game {
     this.alreadyPlayed = [];
     this.winner = null;
     this.dayCount = 1;
+    this.market = market;
   }
 }
 
