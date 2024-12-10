@@ -3,7 +3,7 @@ const PlayerController = require('./Player');
 const MarketController = require('./Market');
 
 let game = null;
-const basicJobs = ['mafia', 'policia', 'medico', 'pueblo'];
+const SPECIAL_JOBS = ['policia', 'medico'];
 const getRandom = (min, max) => min + Math.floor((max - min) * Math.random());
 
 const shuffleArray = (input) => {
@@ -18,15 +18,21 @@ const shuffleArray = (input) => {
 };
 
 const assignJobs = () => {
-  const jobsShuffled = shuffleArray(basicJobs);
-  const newPlayers = shuffleArray(game.players).map((p) => {
-    const r = getRandom(0, jobsShuffled.length - 1);
-    const job = jobsShuffled.splice(r, 1)[0];
-    return {
-      ...p,
-      job: job || 'pueblo'
-    };
+  const jobsShuffled = shuffleArray(SPECIAL_JOBS);
+  let mafias = 0;
+
+  const newPlayers = shuffleArray(game.players).map(player => {
+    if(game.players.length >= 5 && mafias < 2) {
+      player.job = 'mafia';
+      mafias++;
+    } else {
+      const newJob = jobsShuffled.pop();
+      player.job = newJob || 'pueblo';
+    }
+    return player;
   });
+
+
   return newPlayers;
 };
 
@@ -41,6 +47,7 @@ const isGameOver = () => {
 };
 
 exports.getGame = () => {
+  console.log("getting Game", game);
   if (!game) {
     const players = PlayerController.getPlayers();
     const market = MarketController.getMarket();

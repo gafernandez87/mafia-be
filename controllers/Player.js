@@ -66,22 +66,23 @@ const mockPlayers = [
       "health": 2,
       "backpack": [],
   },
-  {
-      "id": "7724b716-03bd-469b-95f6-93ee27a2b226",
-      "name": "Peter",
-      "job": 'policia',
-      "status": "alive",
-      "nextStatus": "alive",
-      "isAdmin": true,
-      "isProtected": false,
-      "money": 100,
-      "isPoisened": false,
-      "health": 2,
-      "backpack": [],
-  }
+  // {
+  //     "id": "7724b716-03bd-469b-95f6-93ee27a2b226",
+  //     "name": "Peter",
+  //     "job": 'policia',
+  //     "status": "alive",
+  //     "nextStatus": "alive",
+  //     "isAdmin": true,
+  //     "isProtected": false,
+  //     "money": 100,
+  //     "isPoisened": false,
+  //     "health": 2,
+  //     "backpack": [],
+  // }
 ];
 
-let players = [...mockPlayers];
+let players = [];
+// let players = [...mockPlayers];
 
 exports.addPlayer = (name) => {
   players.push(name);
