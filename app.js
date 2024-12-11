@@ -11,7 +11,8 @@ const socketConnection = require('./socket-utils');
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Cambia esto al origen de tu frontend
+  // origin: "http://localhost:3000",
+  origin: "https://mafia-fe.vercel.app",
   methods: ["GET", "POST"],
   credentials: true // Permite el uso de cookies/sesiones
 };
