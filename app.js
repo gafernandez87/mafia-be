@@ -12,7 +12,9 @@ const app = express();
 
 const corsOptions = {
   // origin: "http://localhost:3000",
-  origin: "https://mafia-fe.vercel.app",
+  // allow anything
+  origin: "*",
+  // origin: "https://mafia-fe.vercel.app",
   methods: ["GET", "POST"],
   credentials: true // Permite el uso de cookies/sesiones
 };
