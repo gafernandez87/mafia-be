@@ -11,9 +11,9 @@ const socketConnection = require('./socket-utils');
 const app = express();
 
 const corsOptions = {
-  // origin: "*",
+  origin: "*",
   // origin: "https://mafia-fe.vercel.app",
-  origin: process.env.NODE_ENV === 'production' ? "https://mafia-fe.vercel.app" : "*",
+  // origin: process.env.NODE_ENV === 'production' ? "https://mafia-fe.vercel.app" : "*",
   methods: ["GET", "POST"],
   credentials: true // Permite el uso de cookies/sesiones
 };
