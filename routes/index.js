@@ -8,7 +8,7 @@ const PlayerController = require('../controllers/Player');
 const router = express.Router();
 
 router.get('/', (_, res) => {
-  res.status(200).send({ response: 'I am alive' });
+  res.status(200).send({ response: 'I am alive: ' + process.env.PORT });
 });
 
 router.get('/games', async (_, res) => {
