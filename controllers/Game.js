@@ -20,9 +20,10 @@ const shuffleArray = (input) => {
 const assignJobs = () => {
   const jobsShuffled = shuffleArray(SPECIAL_JOBS);
   let mafias = 0;
+  let maxMafias = game.players.length <= 5 ? 1 : 2;
 
   const newPlayers = shuffleArray(game.players).map(player => {
-    if(game.players.length >= 5 && mafias < 2) {
+    if(mafias < maxMafias) {
       player.job = 'mafia';
       mafias++;
     } else {
