@@ -33,16 +33,19 @@ function socketConnection(socket, io) {
 
     socket.on('buy', (data) => {
       const {player, item} = data;
+      const gamePlayer = game.players.find(p => p.id === player.id);
+      if(!gameInPlayer) return;
+
       const success = MarketController.buy(item.name);
       if(success) {
-        PlayerController.makePurchase(player, item);
+        PlayerController.makePurchase(gamePlayer, item);
       }
 
       const game = GameController.getGame();
-      game.players = PlayerController.getPlayers();
+      // game.players = PlayerController.getPlayers();
       game.market = MarketController.getMarket();
       io.emit('game', game);
-    })
+    });
 
     socket.on('reset', () => {
       io.emit('game', GameController.reset());

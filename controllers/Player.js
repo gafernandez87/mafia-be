@@ -110,9 +110,6 @@ exports.takePlayer = async (playerId, taken) => {
 
 
 exports.makePurchase = (player, item) => {
-  const found = players.find((p) => p.id === player.id);
-  if(found) {
-    found.money -= item.price;
-    found.backpack.push(item.name);
-  }
+  player.money -= item.price;
+  player.backpack.push(item.name);
 }
